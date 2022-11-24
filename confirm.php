@@ -1,6 +1,6 @@
 <?php
     session_start();
-    
+    include'products.php';
 
 ?>
 
@@ -25,7 +25,9 @@
                 <div class="col-2 text-right">
                     <a href="cart.php" class="btn btn-primary">
                         <i class="fa fa-shopping-cart"></i> Cart
-                        <span class="badge bg-light text-dark">0</span>
+                        <span class="badge bg-light text-dark">
+                            <?php echo (isset($_SESSION['totalQuantity']) ? $_SESSION['totalQuantity'] : "0"); ?>
+                        </span>
                     </a>
                 </div>
             </div>
