@@ -4,7 +4,7 @@
 
     if(isset($_POST['Process'])){
         if(isset($_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']]))
-         $_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']] += $_POST['qty']; 
+            $_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']] += $_POST['qty']; 
         else
             $_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']] = $_POST['qty']; 
 
@@ -37,7 +37,9 @@
                 <div class="col-2 text-right">
                     <a href="cart.php" class="btn btn-primary">
                         <i class="fa fa-shopping-cart"></i> Cart
-                        <span class="badge bg-light text-dark">0</span>
+                        <span class="badge bg-light text-dark">
+                            <?php echo (isset($_SESSION['totalQuantity']) ? $_SESSION['totalQuantity'] : "0"); ?>
+                        </span>
                     </a>
                 </div>
             </div>
@@ -55,7 +57,9 @@
                             <div class="col-8">
                                 <div class="col-12">
                                     <h1>
-                                        <?php echo $arrProducts[$_GET['itemkey']]['item']; ?>
+                                        <?php 
+                                            echo $arrProducts[$_GET['itemkey']]['item']; 
+                                        ?>
                                         <span class="badge bg-dark">₱ <?php echo $arrProducts[$_GET['itemkey']]['price']; ?></span>
                                     </h1>
                                     <p>
