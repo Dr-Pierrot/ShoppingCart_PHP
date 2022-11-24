@@ -2,6 +2,17 @@
     session_start();    
     require'products.php';
 
+    if(isset($_POST['Process'])){
+        if(isset($_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']]))
+         $_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']] += $_POST['qty']; 
+        else
+            $_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']] = $_POST['qty']; 
+
+        $_SESSION['totalQuantity'] += $_POST['qty'];
+        header("location: confirm.php");
+    }
+   
+
 
 ?>
 <!DOCTYPE html>
@@ -51,6 +62,7 @@
                                         <?php echo $arrProducts[$_GET['itemkey']]['description']; ?>
                                     </p>
                                     <hr>
+                                    <input type="hidden" name="cartkey" value="<?php echo $_GET['itemkey']; ?>">
                                     <label ><h4>Select Color:</h4></label><br>
                                     <input type="radio" name="radColor" id="radBlack" value="Black" checked>
                                     <label for="radBlack">Black</label>
@@ -84,20 +96,7 @@
     
     </form>
     
-    <?php
-        if(isset($Process)){
-            if(isset($_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']])){
-                $_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']] += $_POST['qty'];
-            }
-            else{
-                $_SESSION['cartItems'][$_POST['cartkey']][$_POST['radColor']] += $_POST['qty'];
-            }
-
-            $_SESSION['totalQty'] += $_POST['qty'];
-            
-        }
-
-    ?>
+    
 
 </body>
 </html>
